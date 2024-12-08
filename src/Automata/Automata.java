@@ -1,35 +1,39 @@
 package Automata;
 
-import Util.Pair;
+import State.State;
 
 import java.util.ArrayList;
 
 public abstract class Automata {
     private char[] alphabet;
-    private int numOfStates;
-    private int[] acceptanceStates;
-    private int initialState;
-    private ArrayList<ArrayList<Pair<Character, Integer>>> transitions;
+    private String[] allStates;
+    private String[] acceptanceStates;
+    private String initialState;
+    private ArrayList<State> states;
 
-    public Automata(char[] alphabet, int numOfStates, int[] acceptanceStates, int initialState) {
+    public Automata(char[] alphabet, String[] allStates, String[] acceptanceStates, String initialState) {
         this.alphabet = alphabet;
-        this.numOfStates = numOfStates;
+        this.allStates = allStates;
         this.acceptanceStates = acceptanceStates;
         this.initialState = initialState;
-        this.transitions = new ArrayList<>(numOfStates);
-        for (int i = 0; i < numOfStates; i++) {
-            transitions.add(new ArrayList<>());
+        this.states = new ArrayList<State>();
+        for(String s : allStates) {
+            states.add(new State(s));
         }
     }
 
-    public Automata(char[] alphabet, int numOfStates, int[] acceptanceStates, int initialState, ArrayList<ArrayList<Pair<Character, Integer>>> transitions) {
-        this(alphabet, numOfStates, acceptanceStates, initialState);
-        this.transitions = transitions;
+    protected State getStateByID(String stateID) {
+        for(State s : states) {
+            if(s.getStateID().equals(stateID)) {
+                return s;
+            }
+        }
+        return null;
     }
-    public void addTransition(int begin, int end, char symbol) {
-        ArrayList<Pair<Character, Integer>> transitionsOfBegin = transitions.get(begin);
-        Pair<Character, Integer> transition = new Pair<>(symbol, end);
-        transitionsOfBegin.add(transition);
+
+    public void addTransition(String begin, String end, char symbol) {
+        State beginState = getStateByID(begin);
+        beginState.addTransition(symbol, end);
     }
 
     public abstract boolean accepts(String word);
@@ -44,35 +48,16 @@ public abstract class Automata {
         this.alphabet = alphabet;
     }
 
-    public int[] getAcceptanceStates() {
+    public String[] getAcceptanceStates() {
         return acceptanceStates;
     }
 
-    public void setAcceptanceStates(int[] acceptanceStates) {
-        this.acceptanceStates = acceptanceStates;
-    }
-
-    public int getNumOfStates() {
-        return numOfStates;
-    }
-
-    public void setNumOfStates(int numOfStates) {
-        this.numOfStates = numOfStates;
-    }
-
-    public int getInitialState() {
+    public String getInitialState() {
         return initialState;
     }
 
-    public void setInitialState(int initialState) {
+    public void setInitialState(String initialState) {
         this.initialState = initialState;
     }
 
-    public ArrayList<ArrayList<Pair<Character, Integer>>> getTransitions() {
-        return transitions;
-    }
-
-    public void setTransitions(ArrayList<ArrayList<Pair<Character, Integer>>> transitions) {
-        this.transitions = transitions;
-    }
 }

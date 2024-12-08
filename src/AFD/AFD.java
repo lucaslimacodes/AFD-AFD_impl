@@ -1,24 +1,22 @@
 package AFD;
 
 import Automata.Automata;
+import State.State;
 import Util.Pair;
 
 import java.util.ArrayList;
 
 public class AFD extends Automata {
-    private int currState;
+    private String currState;
 
-    public AFD(char[] alphabet, int numOfStates, int[] acceptanceStates, int initialState) {
-        super(alphabet, numOfStates, acceptanceStates, initialState);
-    }
-
-    public AFD(char[] alphabet, int numOfStates, int[] acceptanceStates, int initialState, ArrayList<ArrayList<Pair<Character, Integer>>> transitions) {
-        super(alphabet, numOfStates, acceptanceStates, initialState, transitions);
+    public AFD(char[] alphabet, String[] allStates, String[] acceptanceStates, String initialState) {
+        super(alphabet, allStates, acceptanceStates, initialState);
+        this.currState = initialState;
     }
 
     protected void feed(char symbol){
-        ArrayList<Pair<Character, Integer>> currTransitions = getTransitions().get(currState);
-        for(Pair<Character, Integer> transition : currTransitions){
+        State currState = this.getStateByID(this.currState);
+        for(Pair<Character, String> transition : currState.getTransitions()){
             if(transition.getFirst() == symbol){
                 this.currState = transition.getSecond();
                 break;
@@ -34,8 +32,8 @@ public class AFD extends Automata {
         for(char symbol : word.toCharArray()){
             feed(symbol);
         }
-        for(int accept : getAcceptanceStates()){
-            if(accept==currState){
+        for(String accept : getAcceptanceStates()){
+            if(accept.equals(currState)){
                 reset();
                 return true;
             }
