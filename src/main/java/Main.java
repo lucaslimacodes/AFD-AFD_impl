@@ -1,4 +1,7 @@
-import AFD.AFD;
+package main.java;
+
+
+import main.java.AFD.AFD;
 
 public class Main {
     public static void main(String[] args) {

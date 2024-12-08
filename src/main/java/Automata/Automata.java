@@ -1,6 +1,6 @@
-package Automata;
+package main.java.Automata;
 
-import State.State;
+import main.java.State.State;
 
 import java.util.ArrayList;
 

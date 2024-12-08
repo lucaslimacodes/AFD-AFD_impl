@@ -1,6 +1,6 @@
-package State;
+package main.java.State;
 
-import Util.Pair;
+import main.java.Util.Pair;
 
 import java.util.ArrayList;
 

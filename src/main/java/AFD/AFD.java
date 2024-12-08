@@ -1,8 +1,8 @@
-package AFD;
+package main.java.AFD;
 
-import Automata.Automata;
-import State.State;
-import Util.Pair;
+import main.java.Automata.Automata;
+import main.java.State.State;
+import main.java.Util.Pair;
 
 import java.util.ArrayList;
 
