@@ -7,6 +7,7 @@
 | AFD                     | :heavy_check_mark: | 
 | AFN                     | :x:                | 
 | Exception Handling      | :x:                |
+| Unit Testing            | :x:                |
 | Automata Modularization | :x:                |
 | EXPR extraction         | :x:                |
 
