@@ -31,6 +31,15 @@ public abstract class Automata {
         return null;
     }
 
+    protected boolean isAcceptanceState(String stateID) {
+        for(String s : acceptanceStates) {
+            if(s.equals(stateID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addTransition(String begin, String end, char symbol) {
         State beginState = getStateByID(begin);
         beginState.addTransition(symbol, end);

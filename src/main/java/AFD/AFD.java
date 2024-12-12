@@ -32,14 +32,9 @@ public class AFD extends Automata {
         for(char symbol : word.toCharArray()){
             feed(symbol);
         }
-        for(String accept : getAcceptanceStates()){
-            if(accept.equals(currState)){
-                reset();
-                return true;
-            }
-        }
+        String finalState = this.currState;
         reset();
-        return false;
+        return isAcceptanceState(finalState);
     }
 
 }
